@@ -57,4 +57,7 @@ black listed vehicles that cant be modded (can remove or add to list in lsconfig
 	"fluence",
 	"sheriff",
 
-nedd help or have questions msg me on discord https://discord.gg/a5HHbSf
+join my discord https://discord.gg/a5HHbSf
+
+ill help with any questions you may have
+
