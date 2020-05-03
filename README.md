@@ -1,5 +1,7 @@
 # vrp_lscustoms
- converted vrp lscustoms to vrp 2 
+ converted vrp lscustoms to vrp 2 for image vrp
+
+https://github.com/ImagicTheCat/
 
 all mods from original lscustoms work.
 
