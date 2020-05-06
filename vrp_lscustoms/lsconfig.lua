@@ -8,6 +8,8 @@ LSC_Config.lock = false
 --Enable/disable old entering way ie have to hit enter
 LSC_Config.oldenter = false
 
+LSC_Config.bank = true
+
 --Menu settings
 LSC_Config.menu = {
 
@@ -179,7 +181,7 @@ LSC_Config.prices = {
 		colors = metalcolors,
 		price = 300
 	},
-
+	
 ------Neon layout------
 	neonlayout = {
 		{name = "Front,Back and Sides", price = 5000},

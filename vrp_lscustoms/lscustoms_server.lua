@@ -14,7 +14,6 @@ function lscustoms:__construct()
   vRP.Extension.__construct(self)
 end
 
-
 lscustoms.event = {}
 
 function lscustoms.event:playerLeave(user)
@@ -59,23 +58,34 @@ function lscustoms.tunnel:playerDropped()
 end
 
 function lscustoms.tunnel:LSC_buttonSelected_S(name, button)
-	local user = vRP.users_by_source[source]
-	--local mymoney = user:getWallet() --payment with wallet money
-	local mymoney = user:getBank() --payment with bank money
-	if button.price then -- check if button have price
-		if button.price <= mymoney then
-			self.remote._LSC_buttonSelected(user.source,name, button, true)
-			mymoney  = mymoney - button.price
-		else
+	local user = vRP.users_by_source[source] 
+	cfg_bank = true
+	if button.purchased == true then
+		return true
+	else 
+		if button.price and cfg_bank == true then
+			if button.price >= 0 and user:getBank() >= button.price then	
+				self.remote._LSC_buttonSelected(user.source,name, button, true)
+				user:setBank(user:getBank()-button.price)
+				user:giveWallet(button.price)
+			else
 			self.remote._LSC_buttonSelected(user.source,name, button, false)
+			end
+		elseif button.price and cfg_bank == false then 
+			if button.price >= 0 and user:getWallet() >= button.price then	
+				self.remote._LSC_buttonSelected(user.source,name, button, true)
+				user:setWallet(user:getWallet()-button.price)
+			else
+			self.remote._LSC_buttonSelected(user.source,name, button, false)
+			end
 		end
 	end
 end
 
+
 function lscustoms.tunnel:LSC_finished(veh)
 	local model = veh.model --Display name from vehicle model(comet2, entityxf)
 	local mods = veh.mods
-
 	local color 			= veh.color
 	local extracolor 		= veh.extracolor
 	local neon 				= veh.neon

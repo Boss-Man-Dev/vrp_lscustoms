@@ -396,7 +396,7 @@ local function DriveInGarage()
 						btn.purchased = true
 					end
 				end
-			scol = respray:addSubMenu("SECONDARY COLORS", "Secondary color", nil,true)
+			scol = respray:addSubMenu("PEARLESCENT", "Pearlescent", nil,true)
 				scol:addSubMenu("CHROME", "Chrome", nil,true)
 				for n, c in pairs(LSC_Config.prices.chrome2.colors) do
 					local btn = scol.Chrome:addPurchase(c.name,LSC_Config.prices.chrome2.price)btn.colorindex = c.colorindex
