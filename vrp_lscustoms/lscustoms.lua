@@ -396,7 +396,7 @@ local function DriveInGarage()
 						btn.purchased = true
 					end
 				end
-			scol = respray:addSubMenu("PEARLESCENT", "Pearlescent", nil,true)
+			scol = respray:addSubMenu("SECONDARY COLOR", "Secondary Color", nil,true)
 				scol:addSubMenu("CHROME", "Chrome", nil,true)
 				for n, c in pairs(LSC_Config.prices.chrome2.colors) do
 					local btn = scol.Chrome:addPurchase(c.name,LSC_Config.prices.chrome2.price)btn.colorindex = c.colorindex
@@ -412,7 +412,7 @@ local function DriveInGarage()
 					end
 				end
 				scol:addSubMenu("MATTE", "Matte", nil,true)
-				for n, c in pairs(LSC_Config.prices.chrome2.colors) do
+				for n, c in pairs(LSC_Config.prices.matte2.colors) do
 					local btn = scol.Matte:addPurchase(c.name,LSC_Config.prices.matte2.price)btn.colorindex = c.colorindex
 					if btn.colorindex == myveh.color[2] then
 						btn.purchased = true
@@ -421,7 +421,7 @@ local function DriveInGarage()
 				scol:addSubMenu("METALLIC", "Metallic", nil,true)
 				for n, c in pairs(LSC_Config.prices.metallic2.colors) do
 					local btn = scol.Metallic:addPurchase(c.name,LSC_Config.prices.metallic2.price)btn.colorindex = c.colorindex
-					if btn.colorindex == myveh.color[2] and myveh.extracolor[1] == btn.colorindex then
+					if btn.colorindex == myveh.color[2] then
 						btn.purchased = true
 					end
 				end
@@ -432,7 +432,13 @@ local function DriveInGarage()
 						btn.purchased = true
 					end
 				end
-		
+				scol:addSubMenu("PEARLESCENT", "Pearlescent", nil,true)
+				for n, c in pairs(LSC_Config.prices.metallic2.colors) do
+					local btn = scol.Pearlescent:addPurchase(c.name,LSC_Config.prices.metallic2.price)btn.colorindex = c.colorindex
+					if btn.colorindex == myveh.color[2] then
+						btn.purchased = true
+					end
+				end
 		
 		LSCMenu.categories:addSubMenu("WHEELS", "Wheels", "Custom rims, tires and colors.",true)
 			wtype = LSCMenu.categories.Wheels:addSubMenu("WHEEL TYPE", "Wheel type", "Custom rims in all styles and sizes.",true)
@@ -716,14 +722,14 @@ function LSCMenu:onSelectedIndexChanged(name, button)
 	CheckPurchases(m)
 	m = m.name:lower()
 	p = p:lower()
-	if m == "chrome" or m ==  "classic" or m ==  "matte" or m ==  "metals" then
+	if m == "chrome" or m ==  "classic" or m ==  "matte" or m ==  "metals" or m == "metallic" then
 		if p == "primary color" then
 			SetVehicleColours(veh,button.colorindex,myveh.color[2])
 		else
 			SetVehicleColours(veh,myveh.color[1],button.colorindex)	
 		end
 		
-	elseif m == "metallic" then
+	elseif m == "pearlescent" then
 		if p == "primary color" then
 			SetVehicleColours(veh,button.colorindex,myveh.color[2])
 			SetVehicleExtraColours(veh, myveh.color[2], myveh.extracolor[2])
@@ -780,7 +786,7 @@ function lscustoms:LSC_buttonSelected(name, button, canpurchase)
 	end
 	
 	mname = m.name:lower()
-	if mname == "chrome" or mname ==  "classic" or mname ==  "matte" or mname ==  "metals" then
+	if mname == "chrome" or mname ==  "classic" or mname ==  "matte" or mname ==  "metals" or mname == "metallic" then
 		if m.parent == "Primary color" then
 			if button.name == "Stock" or button.purchased or CanPurchase(price, canpurchase) then
 				myveh.color[1] = button.colorindex
@@ -790,7 +796,7 @@ function lscustoms:LSC_buttonSelected(name, button, canpurchase)
 				myveh.color[2] = button.colorindex
 			end
 		end
-	elseif mname == "metallic" then
+	elseif mname == "pearlescent" then
 		if m.parent == "Primary color" then
 			if button.name == "Stock" or button.purchased or CanPurchase(price, canpurchase)then
 				myveh.color[1] = button.colorindex
@@ -1066,7 +1072,7 @@ end
 --Bunch of checks
 function CheckPurchases(m)
 	name = m.name:lower()
-	if name == "chrome" or name ==  "classic" or name ==  "matte" or name ==  "metals" then
+	if name == "chrome" or name ==  "classic" or name ==  "matte" or name ==  "metals" or name == "metallic" then
 		if m.parent == "Primary color" then
 			for i,b in pairs(m.buttons) do
 				if b.purchased and b.colorindex ~= myveh.color[1] then
@@ -1088,7 +1094,7 @@ function CheckPurchases(m)
 				end
 			end
 		end
-	elseif name == "metallic" then
+	elseif name == "pearlescent" then
 		if m.parent == "Primary color" then
 			for i,b in pairs(m.buttons) do
 				if b.purchased and b.colorindex ~= myveh.color[1] then
