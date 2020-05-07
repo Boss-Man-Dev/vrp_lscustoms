@@ -86,11 +86,16 @@ end
 function lscustoms.tunnel:LSC_finished(veh)
 	local model = veh.model --Display name from vehicle model(comet2, entityxf)
 	local mods = veh.mods
-	local color 			= veh.color
-	local extracolor 		= veh.extracolor
+	local plate = {}
+	local color 			= veh.color[1]
+	local secondary			= veh.color[2]
+	local pearlescent		= veh.color[3]
+	local extracolor 		= veh.extracolor[2]
+	local pearlescent 		= veh.extracolor[3]
 	local neon 				= veh.neon
 	local neoncolor 		= veh.neoncolor
 	local smokecolor 		= veh.smokecolor
+	local platetext 		= veh.plateindex
 	local plateindex 		= veh.plateindex
 	local windowtint 		= veh.windowtint
 	local wheeltype 		= veh.wheeltype
